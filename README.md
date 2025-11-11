@@ -56,5 +56,5 @@ El próximo objetivo es completar la implementación del **`TripService`** (puer
 -----
 **Laboratorio académico: Microservicios y Patrón Saga en Spring Cloud**
 
-Desarrollado por: *Braulio Tovar*
+Desarrollado por: *Braulio Tovar* , *Jonathan Vega*
 -----
