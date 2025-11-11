@@ -1,14 +1,10 @@
 package com.travel.passengerservice.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 
+// Quitamos las anotaciones @Getter y @Setter de Lombok
 @Entity
-@Getter
-@Setter
 @Table(name = "passenger")
 public class Passenger {
 
@@ -24,7 +20,7 @@ public class Passenger {
     private String email;
 
     @Column(name = "rating_avg")
-    private Double ratingAvg; // rating_avg del modelo de datos [cite: 109]
+    private Double ratingAvg;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -32,5 +28,51 @@ public class Passenger {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+    }
+
+    // --- MÉTODOS GETTERS Y SETTERS GENERADOS MANUALMENTE ---
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getKeycloakSub() {
+        return keycloakSub;
+    }
+
+    public void setKeycloakSub(String keycloakSub) {
+        this.keycloakSub = keycloakSub;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Double getRatingAvg() {
+        return ratingAvg;
+    }
+
+    public void setRatingAvg(Double ratingAvg) {
+        this.ratingAvg = ratingAvg;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }
