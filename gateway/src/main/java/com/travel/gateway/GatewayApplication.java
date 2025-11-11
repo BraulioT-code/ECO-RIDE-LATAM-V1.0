@@ -1,6 +1,6 @@
 package com.travel.gateway;
 
-import com.travel.gateway.security.KeycloakTokenRelayFilter; // <-- ¡Asegúrate de este import!
+import com.travel.gateway.security.KeycloakTokenRelayFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -13,7 +13,10 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
-    // El bean debe tener el nombre en camelCase: keycloakTokenRelayFilter
+    /**
+     * Define el bean del filtro custom. El nombre del bean es el nombre del método:
+     * 'keycloakTokenRelayFilter'.
+     */
     @Bean
     public GatewayFilter keycloakTokenRelayFilter() {
         return new KeycloakTokenRelayFilter();
