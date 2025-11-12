@@ -1,0 +1,14 @@
+package entities;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PaymentAuthorizedEvent {
+    private Long reservationId;
+    private Long paymentIntentId;
+    private String status;
+}
