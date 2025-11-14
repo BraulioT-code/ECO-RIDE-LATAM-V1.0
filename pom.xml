@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>ECO-RIDE LATAM</name>
     <description>ECO-RIDE LATAM</description>
+    <packaging>pom</packaging>
     <url/>
     <licenses>
         <license/>
