@@ -50,7 +50,7 @@ services:
 
   # --- Broker de Mensajería (Confluent) ---
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
     ports:
       - '2181:2181'
@@ -59,18 +59,20 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
     ports:
       - '${KAFKA_BROKER_PORT}:${KAFKA_BROKER_PORT}' # 9092
     depends_on:
       - zookeeper
     environment:
+      KAFKA_PROCESS_ROLES: ''
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093,EXTERNAL://localhost:${KAFKA_BROKER_PORT}
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093,EXTERNAL://localhost:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093,EXTERNAL://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
 
