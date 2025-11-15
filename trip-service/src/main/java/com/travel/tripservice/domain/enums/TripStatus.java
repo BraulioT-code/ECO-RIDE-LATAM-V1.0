@@ -1,8 +1,7 @@
 package com.travel.tripservice.domain.enums;
 
 public enum TripStatus {
-    DRAFT,
-    PUBLISHED,
+    SCHEDULED,
     IN_PROGRESS,
     COMPLETED,
     CANCELLED

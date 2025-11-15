@@ -2,41 +2,64 @@ package com.travel.tripservice.domain.entities;
 
 import com.travel.tripservice.domain.enums.ReservationStatus;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "reservation")
+@Table(name = "reservations")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Reservation {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "trip_id", nullable = false)
+    @Column(nullable = false)
     private Long tripId;
 
-    @Column(name = "passenger_id", nullable = false)
-    private String passengerId;
+    @Column(nullable = false)
+    private String passengerId; // Keycloak sub
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ReservationStatus status;
 
-    @Column(name = "created_at")
+    @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime confirmedAt;
+
+    @Column
+    private LocalDateTime cancelledAt;
+
+    @Column
+    private String cancellationReason;
 
     @PrePersist
     protected void onCreate() {
-        if (this.createdAt == null) {
-            this.createdAt = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
+        if (status == null) {
+            status = ReservationStatus.PENDING;
         }
+    }
+
+    public void confirm() {
+        if (status != ReservationStatus.PENDING) {
+            throw new IllegalStateException("Solo se pueden confirmar reservas pendientes");
+        }
+        status = ReservationStatus.CONFIRMED;
+        confirmedAt = LocalDateTime.now();
+    }
+
+    public void cancel(String reason) {
+        if (status == ReservationStatus.CANCELLED) {
+            throw new IllegalStateException("La reserva ya está cancelada");
+        }
+        status = ReservationStatus.CANCELLED;
+        cancelledAt = LocalDateTime.now();
+        cancellationReason = reason;
     }
 }

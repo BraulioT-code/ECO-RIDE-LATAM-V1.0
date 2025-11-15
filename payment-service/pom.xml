@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>com.travel</groupId>
-    <artifactId>trip-service</artifactId>
+    <artifactId>payment-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>trip-service</name>
-    <description>Trip Service for Eco-Ride LATAM</description>
+    <name>payment-service</name>
+    <description>Payment Service for Eco-Ride LATAM</description>
 
     <properties>
         <java.version>17</java.version>
